@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/img/icon.png">
+    <title>Cade meu Médico?!</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <style>
+        body {
+            font-family: Elephant !important;
+            padding-top: 50px;
+            padding-bottom: 20px;
+            font-family: Elephant !important;
+        }
+
+            body h2 {
+                color: #262262 !important;
+                font-family: Elephant !important;
+            }
+
+        #bt {
+            border-color: #337ab7;
+        }
+
+            #bt:hover {
+                border-color: #2e6da4;
+                background-color: #337ab7;
+                color: white;
+            }
+
+        #anco {
+            color: black !important;
+            float: left;
+            height: 50px;
+            padding: 15px 15px;
+            font-size: 18px;
+            line-height: 20px;
+            font-weight: bold;
+        }
+
+        a#anco:hover {
+            color: white !important;
+            text-decoration: none;
+            background-color: #669eb7 !important;
+        }
+
+        #ancor {
+            color: black !important;
+            float: left;
+            height: 50px;
+            padding: 15px 15px;
+            font-size: 18px;
+            line-height: 20px;
+            font-weight: bold;
+        }
+
+        a#ancor:hover {
+            color: white !important;
+            background-color: #669eb7;
+            text-decoration: none;
+        }
+
+        a#ancor::selection {
+            background-color: #669eb7 !important;
+            color: white !important;
+        }
+
+        .dropdown-menu {
+            background-color: #669eb7 !important;
+        }
+
+        .navbar-inverse .navbar-nav > .open > a {
+            color: #ffffff;
+            background-color: #669eb7;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="background-color:#669eb7" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <b><a id="anco" class="navbar-brand" style="color:black; padding:4px;" href="/Home/Index"><img src="~/img/icon.png" width="45px" />Cadê Meu Médico?</a></b>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" id="ancor" aria-haspopup="true" aria-expanded="false" style="cursor:pointer;">
+                                Cadastros<span class="caret" style="border-top-color:black !important;"></span>
+                            </a>
+                            <ul class="dropdown-menu" style="background-color:#669eb7; border-radius:5%; box-shadow:10px 10px 5px grey;">
+                                <li><b><a id="anco" href="/Especialidade/Create">Especialidades</a></b></li>
+                                <li><b><a id="anco" href="/Medico/Create">Médico</a></b></li>
+                                <hr style="width:100%; border-bottom:1px solid !important; border-top:0px; margin-bottom:-15px;" />
+                                <li><b><a style="margin-top: 1px;" id="anco" href="/Cidade/Create">Cidade</a></b></li>
+                                <li><b><a id="anco" href="/Estado/Create">Estados</a></b></li>
+                                <li><b><a id="anco" href="/Pais/Create">País</a></b></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"style="background-color:#669eb7;" id="ancor">
+                                @User.Identity.Name<span class="caret" style="border-top-color:black !important;"></span>
+                            </a>
+                            <ul class="dropdown-menu" style="background-color:#669eb7; border-radius:5%; box-shadow:10px 10px 5px grey;">
+                                <li>@Html.ActionLink("Alterar Senha", "AlterarSenha", "Perfil", new { area = "" }, new { id = "anco" })</li>
+                                <li>@Html.ActionLink("Sair", "Logout", "Autenticacao", new { area = "" }, new { id = "anco", style = "width:100%; border-top:1px solid white" })</li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Autenticacao", new { area = "" }, new { @class = "navbar-brand", id = "anco" })</li>
+                        <li>@Html.ActionLink("Cadastre-se", "Cadastrar", "Autenticacao", new { area = "" }, new { @class = "navbar-brand", id = "anco" })</li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Cade meu Médico?!</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/Site.css"></script>
+    @RenderSection("script", false);
+</body>
+</html>
